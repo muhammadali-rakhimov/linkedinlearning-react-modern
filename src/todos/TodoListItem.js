@@ -41,22 +41,24 @@ const RemoveButton = styled.button`
 
 const TodoListItem = ({ todo, onRemovePressed, onCompletedPressed }) => {
   return (
-    <TodoItemContainer className='todo-item-container'>
+    <TodoItemContainer>
       <h3>{todo.text}</h3>
+      <p>
+        Created at:&nbsp;
+        {(new Date(todo.createdAt)).toLocaleDateString()}
+      </p>
       <ButtonsContainer>
         {
-          todo.isCompleted ?
-            null :
+          todo.isCompleted
+            ? null :
             <CompletedButton
               onClick={() => {
                 onCompletedPressed(todo.id)
               }}
-              className='completed-button'
             >Mark as Completed</CompletedButton>
         }
         <RemoveButton
           onClick={() => onRemovePressed(todo.id)}
-          className='remove-button'
         >
           Remove
         </RemoveButton>
